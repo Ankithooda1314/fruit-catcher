@@ -2,19 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+    <meta ="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruit Catcher Game</title>
+
+    <!-- CORRECT TAILWIND CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="bg-green-100 flex justify-center items-center h-screen">
+  <body class="bg-green-100 w-screen h-screen overflow-hidden relative">
+    <!-- BUTTONS: START + RESTART -->
+    <div class="absolute top-4 inset-x-0 flex justify-center gap-4 z-50">
+      <button
+        id="startBtn"
+        class="px-4 py-2 bg-green-600 text-white font-bold rounded shadow-lg"
+      >
+        Start Game
+      </button>
+
+      <button
+        id="restartBtn"
+        class="px-4 py-2 bg-blue-600 text-white font-bold rounded shadow-lg hidden"
+      >
+        Restart
+      </button>
+    </div>
+
     <!-- GAME AREA -->
-    <div
-      id="gameArea"
-      class="relative bg-white w-[350px] h-[500px] border-4 border-green-700 overflow-hidden rounded-lg shadow-lg"
-    >
-      <!-- SCORE DISPLAY -->
+    <div id="gameArea" class="relative bg-white w-full h-full overflow-hidden">
+      <!-- SCORE -->
       <div
         id="score"
         class="absolute top-2 left-2 text-xl font-bold text-green-700"
@@ -22,23 +39,31 @@
         Score: 0
       </div>
 
-      <!-- BASKET (Player) -->
+      <!-- MISSES -->
+      <div
+        id="misses"
+        class="absolute top-2 right-2 text-xl font-bold text-red-600"
+      >
+        Miss: 0
+      </div>
+
+      <!-- BASKET -->
       <img
         id="basket"
-        src="assests/Images/basket.png"
+        src="assets/images/basket.png"
         class="absolute bottom-0 left-[150px] w-20 h-14"
         alt="basket"
       />
 
-      <!-- FRUIT (Falling object — temporary hidden) -->
+      <!-- FRUIT -->
       <img
         id="fruit"
-        src="assests/Images/apple.png"
+        src="assets/images/apple.png"
         class="absolute top-0 left-[150px] w-12 h-12 hidden"
         alt="fruit"
       />
     </div>
 
-    <script src="script.js"></script>
+    <script src="custom.js"></script>
   </body>
 </html>

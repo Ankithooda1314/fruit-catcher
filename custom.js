@@ -1,6 +1,21 @@
 // 1) HTML se elements pakadna
 const gameArea = document.getElementById("gameArea");
 const basket = document.getElementById("basket");
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+
+let gameRunning = false;
+let fall = null;
+
+let score = 0;
+const scoreDisplay = document.getElementById("score");
+
+
+//miss counter
+let misses = 0;
+const missDisplay = document.getElementById("misses");
+
 
 // 2) Basket ki starting position (x axis me)
 let basketX = 150;       // pixels
@@ -40,3 +55,156 @@ document.addEventListener("keydown", function (event) {
   // 6) Position ko screen par update karna
   updateBasketPosition();
 });
+
+let fruitX = 100;   // starting X position
+let fruitY = 0;     // starting Y position
+let fruitSpeed = 3; // falling speed (jitna bada, utna fast)
+
+// Fruit position ko apply karna
+function updateFruitPosition() {
+  fruit.style.left = fruitX + "px";
+  fruit.style.top = fruitY + "px";
+}
+
+
+
+
+
+
+
+
+function dropFruit() {
+  if (!gameRunning) return; // safety
+
+  fruit.classList.remove("hidden");
+
+  fruitX = Math.random() * (gameArea.clientWidth - fruit.offsetWidth);
+  fruitY = 0;
+
+  fall = setInterval(() => {
+    if (!gameRunning) {
+      clearInterval(fall);
+      return;
+    }
+
+    fruitY += fruitSpeed;
+    updateFruitPosition();
+
+    // CATCH CHECK
+    if (checkCatch()) {
+      clearInterval(fall);
+      updateScore();
+      dropFruit();
+      return;
+    }
+
+    // MISS CHECK
+    if (fruitY > gameArea.clientHeight - fruit.offsetHeight) {
+      clearInterval(fall);
+
+      updateMiss();
+
+      if (misses >= 3) {
+        gameOver();
+        return;
+      }
+
+      dropFruit();
+    }
+
+  }, 30);
+}
+
+
+dropFruit();
+
+
+
+
+
+
+function updateScore() {
+  score++;
+  scoreDisplay.innerText = "Score: " + score;
+}
+
+
+function checkCatch() {
+  const basketRect = basket.getBoundingClientRect();
+  const fruitRect = fruit.getBoundingClientRect();
+
+  const verticalMatch = fruitRect.bottom >= basketRect.top;
+  const horizontalMatch =
+    fruitRect.left < basketRect.right &&
+    fruitRect.right > basketRect.left;
+
+  return verticalMatch && horizontalMatch;
+}
+
+
+
+
+
+//miss score update function
+
+function updateMiss() {
+  misses++;
+  missDisplay.innerText = "Miss: " + misses;
+
+
+}
+
+
+
+
+
+function gameOver() {
+
+  gameRunning = false;
+  // fruit ko hide kar do
+  fruit.classList.add("hidden");
+
+
+  clearInterval(fall);
+  // Restart button dikhado
+  restartBtn.classList.remove("hidden");
+}
+
+
+
+
+
+
+//start game function
+function startGame() {
+  score = 0;
+  misses = 0;
+  gameRunning = true;
+
+  scoreDisplay.innerText = "Score: 0";
+  missDisplay.innerText = "Miss: 0";
+
+  startBtn.classList.add("hidden");
+  restartBtn.classList.add("hidden");
+
+  dropFruit();   // game start
+}
+
+//restart game function
+
+function restartGame() {
+  score = 0;
+  misses = 0;
+gameRunning = true;
+
+
+  scoreDisplay.innerText = "Score: 0";
+  missDisplay.innerText = "Miss: 0";
+
+  restartBtn.classList.add("hidden");
+
+  dropFruit();   // new game start
+}
+
+startBtn.addEventListener("click", startGame);
+restartBtn.addEventListener("click", restartGame);
