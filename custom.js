@@ -4,6 +4,27 @@ const basket = document.getElementById("basket");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 
+const catchSound = new Audio("assests/Sounds/tap.wav");
+const overSound = new Audio("assests/Sounds/over.wav");
+const missSound = new Audio("assests/Sounds/miss.wav");
+
+const fruit = document.getElementById("fruit");
+
+const fruitImages = [
+  "assests/Images/apple.png",
+  "assests/Images/banana.png",
+  "assests/Images/mango.png",
+  "assests/Images/orange.png"
+];
+
+
+//best score
+let best = 0;
+const bestDisplay = document.getElementById("bestScore");
+bestDisplay.innerText = "Best: 0";
+
+
+
 
 let gameRunning = false;
 let fall = null;
@@ -73,10 +94,65 @@ function updateFruitPosition() {
 
 
 
+// function dropFruit() {
+//   if (!gameRunning) return; // safety
+
+//   fruit.classList.remove("hidden");
+
+//   fruitX = Math.random() * (gameArea.clientWidth - fruit.offsetWidth);
+//   fruitY = 0;
+
+//   fall = setInterval(() => {
+//     if (!gameRunning) {
+//       clearInterval(fall);
+//       return;
+//     }
+
+//     fruitY += fruitSpeed;
+//     updateFruitPosition();
+
+//     // CATCH CHECK
+//     if (checkCatch()) {
+
+
+//       catchSound.currentTime=0;
+//       catchSound.play();
+
+
+//       clearInterval(fall);
+//       updateScore();
+//       dropFruit();
+//       return;
+//     }
+
+//     // MISS CHECK
+//     if (fruitY > gameArea.clientHeight - fruit.offsetHeight) {
+//       clearInterval(fall);
+
+//       missSound.currentTime=0;
+//       missSound.play();
+
+//       updateMiss();
+
+//       if (misses >= 3) {
+//         gameOver();
+//         return;
+//       }
+
+//       dropFruit();
+//     }
+
+//   }, 30);
+// }
+
+
 function dropFruit() {
   if (!gameRunning) return; // safety
 
   fruit.classList.remove("hidden");
+
+  // 🔥 RANDOM FRUIT IMAGE HERE
+  fruit.src = fruitImages[Math.floor(Math.random() * fruitImages.length)];
 
   fruitX = Math.random() * (gameArea.clientWidth - fruit.offsetWidth);
   fruitY = 0;
@@ -92,6 +168,10 @@ function dropFruit() {
 
     // CATCH CHECK
     if (checkCatch()) {
+
+      catchSound.currentTime = 0;
+      catchSound.play();
+
       clearInterval(fall);
       updateScore();
       dropFruit();
@@ -101,6 +181,9 @@ function dropFruit() {
     // MISS CHECK
     if (fruitY > gameArea.clientHeight - fruit.offsetHeight) {
       clearInterval(fall);
+
+      missSound.currentTime = 0;
+      missSound.play();
 
       updateMiss();
 
@@ -160,6 +243,15 @@ function updateMiss() {
 
 function gameOver() {
 
+  
+if (score > best) {
+  best = score;
+  bestDisplay.innerText = "Best: " + best;
+}
+
+  overSound.currentTime=0;
+  overSound.play();
+
   gameRunning = false;
   // fruit ko hide kar do
   fruit.classList.add("hidden");
@@ -208,3 +300,14 @@ gameRunning = true;
 
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", restartGame);
+
+
+
+
+
+
+
+
+
+
+

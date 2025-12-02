@@ -11,30 +11,61 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="bg-green-100 w-screen h-screen overflow-hidden relative">
+  <body
+    class="bg-green-100 w-screen h-screen overflow-hidden flex justify-center items-center relative bg-cover bg-center bg-no-repeat"
+  >
     <!-- BUTTONS: START + RESTART -->
     <div class="absolute top-4 inset-x-0 flex justify-center gap-4 z-50">
+      <!-- <button
+        id="startBtn"
+        class="px-4 py-2 bg-green-600 text-white font-bold rounded shadow-lg absolute top-20"
+      >
+        Start Game
+      </button> -->
+
       <button
         id="startBtn"
-        class="px-4 py-2 bg-green-600 text-white font-bold rounded shadow-lg"
+        class="px-10 py-6 bg-green-600 text-[30px] text-white font-bold rounded shadow-lg items-center gap-2 transition transform hover:scale-105 absolute top-[250px]"
       >
+        <img
+          src="assests/Images/catch.jpg"
+          class="w-[200px] rounded"
+          alt="start icon"
+        />
         Start Game
       </button>
 
-      <button
+      <!-- <button
         id="restartBtn"
         class="px-4 py-2 bg-blue-600 text-white font-bold rounded shadow-lg hidden"
       >
+        Restart
+      </button> -->
+
+      <button
+        id="restartBtn"
+        class="px-10 py-6 bg-red-600 text-white font-bold rounded shadow-lg text-[30px] items-center gap-2 hidden absolute top-[250px] transition transform hover:scale-105"
+      >
+        <img
+          src="assests/Images/gameover.png"
+          class="w-[200px] rounded"
+          alt="restart icon"
+        />
         Restart
       </button>
     </div>
 
     <!-- GAME AREA -->
-    <div id="gameArea" class="relative bg-white w-full h-full overflow-hidden">
+    <div
+      id="gameArea"
+      class="relative bg-white w-[800px] h-[700px] mx-auto overflow-hidden shadow-xl rounded-lg bg-center bg-cover bg-no-repeat"
+      style="background-image: url('assests/Images/gane-bg.jpg')"
+    >
+      <div class="absolute inset-0 backdrop-blur-md"></div>
       <!-- SCORE -->
       <div
         id="score"
-        class="absolute top-2 left-2 text-xl font-bold text-green-700"
+        class="absolute top-2 left-2 text-xl font-bold text-green-700 border border-white-700 px-2 rounded-md text-white"
       >
         Score: 0
       </div>
@@ -42,27 +73,38 @@
       <!-- MISSES -->
       <div
         id="misses"
-        class="absolute top-2 right-2 text-xl font-bold text-red-600"
+        class="absolute top-2 right-2 text-xl font-bold text-red-600 border border-white-600 px-2 rounded-md text-white"
       >
         Miss: 0
+      </div>
+
+      <!-- best score -->
+
+      <div
+        id="bestScore"
+        class="absolute bottom-2 left-2 text-xl font-bold text-purple-700 border border-white-700 px-2 rounded-md text-white"
+      >
+        Best: 0
       </div>
 
       <!-- BASKET -->
       <img
         id="basket"
-        src="assets/images/basket.png"
-        class="absolute bottom-0 left-[150px] w-20 h-14"
+        src="assests/Images/basket.png"
+        class="absolute bottom-0 left-[150px] w-[100px]"
         alt="basket"
       />
 
       <!-- FRUIT -->
       <img
         id="fruit"
-        src="assets/images/apple.png"
+        src="assests/Images/apple.png"
         class="absolute top-0 left-[150px] w-12 h-12 hidden"
         alt="fruit"
       />
     </div>
+
+    <!-- score board -->
 
     <script src="custom.js"></script>
   </body>
