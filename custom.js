@@ -14,16 +14,20 @@ const fruitImages = [
   "assests/Images/apple.png",
   "assests/Images/banana.png",
   "assests/Images/mango.png",
-  "assests/Images/orange.png"
+  "assests/Images/strawberrry.png"
 ];
 
 
+
+
 //best score
-let best = 0;
+// let best = 0;
+// const bestDisplay = document.getElementById("bestScore");
+// bestDisplay.innerText = "Best: 0";
+
+let best = Number(localStorage.getItem("bestScore")) || 0;
 const bestDisplay = document.getElementById("bestScore");
-bestDisplay.innerText = "Best: 0";
-
-
+bestDisplay.innerText = "Best: " + best;
 
 
 let gameRunning = false;
@@ -89,63 +93,6 @@ function updateFruitPosition() {
 
 
 
-
-
-
-
-
-// function dropFruit() {
-//   if (!gameRunning) return; // safety
-
-//   fruit.classList.remove("hidden");
-
-//   fruitX = Math.random() * (gameArea.clientWidth - fruit.offsetWidth);
-//   fruitY = 0;
-
-//   fall = setInterval(() => {
-//     if (!gameRunning) {
-//       clearInterval(fall);
-//       return;
-//     }
-
-//     fruitY += fruitSpeed;
-//     updateFruitPosition();
-
-//     // CATCH CHECK
-//     if (checkCatch()) {
-
-
-//       catchSound.currentTime=0;
-//       catchSound.play();
-
-
-//       clearInterval(fall);
-//       updateScore();
-//       dropFruit();
-//       return;
-//     }
-
-//     // MISS CHECK
-//     if (fruitY > gameArea.clientHeight - fruit.offsetHeight) {
-//       clearInterval(fall);
-
-//       missSound.currentTime=0;
-//       missSound.play();
-
-//       updateMiss();
-
-//       if (misses >= 3) {
-//         gameOver();
-//         return;
-//       }
-
-//       dropFruit();
-//     }
-
-//   }, 30);
-// }
-
-
 function dropFruit() {
   if (!gameRunning) return; // safety
 
@@ -197,19 +144,24 @@ function dropFruit() {
 
   }, 30);
 }
-
-
-dropFruit();
-
-
-
+// dropFruit();
 
 
 
 function updateScore() {
   score++;
   scoreDisplay.innerText = "Score: " + score;
+
+
+   if (score > best) {
+    best = score;
+    bestDisplay.innerText = "Best: " + best;
+    localStorage.setItem("bestScore", best);
+  }
 }
+
+
+
 
 
 function checkCatch() {
@@ -226,8 +178,6 @@ function checkCatch() {
 
 
 
-
-
 //miss score update function
 
 function updateMiss() {
@@ -236,8 +186,6 @@ function updateMiss() {
 
 
 }
-
-
 
 
 
@@ -261,9 +209,6 @@ if (score > best) {
   // Restart button dikhado
   restartBtn.classList.remove("hidden");
 }
-
-
-
 
 
 
