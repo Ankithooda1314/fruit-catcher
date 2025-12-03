@@ -20,11 +20,6 @@ const fruitImages = [
 
 
 
-//best score
-// let best = 0;
-// const bestDisplay = document.getElementById("bestScore");
-// bestDisplay.innerText = "Best: 0";
-
 let best = Number(localStorage.getItem("bestScore")) || 0;
 const bestDisplay = document.getElementById("bestScore");
 bestDisplay.innerText = "Best: " + best;
@@ -37,36 +32,35 @@ let score = 0;
 const scoreDisplay = document.getElementById("score");
 
 
-//miss counter
+
 let misses = 0;
 const missDisplay = document.getElementById("misses");
 
 
-// 2) Basket ki starting position (x axis me)
-let basketX = 150;       // pixels
-const basketSpeed = 20;  // har keypress me kitna move kare
 
-// 3) Basket ki position ko apply karne wala function
+let basketX = 150;       
+const basketSpeed = 20;  
+
+
 function updateBasketPosition() {
   basket.style.left = basketX + "px";
 }
 
-// Pehli baar call, taaki JS wali position set ho jaye
 updateBasketPosition();
 
-// 4) Keyboard event sunna (keys press hone par)
+
 document.addEventListener("keydown", function (event) {
-  // Sirf left & right arrow pe react karna
+ 
   if (event.key === "ArrowLeft") {
-    basketX -= basketSpeed;  // left jana
+    basketX -= basketSpeed;  
   } else if (event.key === "ArrowRight") {
-    basketX += basketSpeed;  // right jana
+    basketX += basketSpeed; 
   } else {
-    // agar koi aur key hai, kuch mat karo
+
     return;
   }
 
-  // 5) Basket ko boundary se bahar nahi jane dena
+ 
   const maxX = gameArea.clientWidth - basket.offsetWidth;
 
   if (basketX < 0) {
@@ -77,15 +71,15 @@ document.addEventListener("keydown", function (event) {
     basketX = maxX;
   }
 
-  // 6) Position ko screen par update karna
+  
   updateBasketPosition();
 });
 
-let fruitX = 100;   // starting X position
-let fruitY = 0;     // starting Y position
-let fruitSpeed = 3; // falling speed (jitna bada, utna fast)
+let fruitX = 100;   
+let fruitY = 0;     
+let fruitSpeed = 3; 
 
-// Fruit position ko apply karna
+
 function updateFruitPosition() {
   fruit.style.left = fruitX + "px";
   fruit.style.top = fruitY + "px";
@@ -94,11 +88,11 @@ function updateFruitPosition() {
 
 
 function dropFruit() {
-  if (!gameRunning) return; // safety
+  if (!gameRunning) return; 
 
   fruit.classList.remove("hidden");
 
-  // 🔥 RANDOM FRUIT IMAGE HERE
+ 
   fruit.src = fruitImages[Math.floor(Math.random() * fruitImages.length)];
 
   fruitX = Math.random() * (gameArea.clientWidth - fruit.offsetWidth);
@@ -113,7 +107,7 @@ function dropFruit() {
     fruitY += fruitSpeed;
     updateFruitPosition();
 
-    // CATCH CHECK
+   
     if (checkCatch()) {
 
       catchSound.currentTime = 0;
@@ -125,7 +119,6 @@ function dropFruit() {
       return;
     }
 
-    // MISS CHECK
     if (fruitY > gameArea.clientHeight - fruit.offsetHeight) {
       clearInterval(fall);
 
@@ -144,7 +137,7 @@ function dropFruit() {
 
   }, 30);
 }
-// dropFruit();
+
 
 
 
@@ -201,12 +194,12 @@ if (score > best) {
   overSound.play();
 
   gameRunning = false;
-  // fruit ko hide kar do
+  
   fruit.classList.add("hidden");
 
 
   clearInterval(fall);
-  // Restart button dikhado
+ 
   restartBtn.classList.remove("hidden");
 }
 
