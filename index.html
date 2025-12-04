@@ -16,13 +16,6 @@
   >
     <!-- BUTTONS: START + RESTART -->
     <div class="absolute top-4 inset-x-0 flex justify-center gap-4 z-50">
-      <!-- <button
-        id="startBtn"
-        class="px-4 py-2 bg-green-600 text-white font-bold rounded shadow-lg absolute top-20"
-      >
-        Start Game
-      </button> -->
-
       <button
         id="startBtn"
         class="px-10 py-6 bg-green-600 text-[30px] text-white font-bold rounded shadow-lg items-center gap-2 transition transform hover:scale-105 absolute top-[250px]"
@@ -34,13 +27,6 @@
         />
         Start Game
       </button>
-
-      <!-- <button
-        id="restartBtn"
-        class="px-4 py-2 bg-blue-600 text-white font-bold rounded shadow-lg hidden"
-      >
-        Restart
-      </button> -->
 
       <button
         id="restartBtn"
@@ -104,8 +90,61 @@
       />
     </div>
 
-    <!-- score board -->
+    <!-- CONTROLS SCREEN (Shown Before Game Starts) -->
+    <!-- <div
+       id="controlsScreen"
+      class="fixed inset-0 bg-black bg-opacity-80 text-white text-2xl flex flex-col items-center justify-center space-y-4 z-[100]"
+    >
+      <h1 class="text-4xl font-bold mb-4">Game Controls</h1>
 
-    <script src="custom.js"></script>
+      <p>⬅ or A — Move Left</p>
+      <p>➡ or D — Move Right</p>
+      <p>SPACE — Pause / Resume Game</p>
+
+      <button
+        id="controlsStartBtn"
+        class="mt-6 px-6 py-3 bg-green-600 rounded-lg text-white text-2xl font-bold hover:bg-green-700 transition"
+      >
+        Play Game
+      </button>
+    </div> -->
+
+    <div
+      id="controlsScreen"
+      class="fixed inset-0 bg-black bg-opacity-90 text-white text-2xl flex flex-col items-center justify-center space-y-4 z-[100]"
+    >
+      <h1 class="text-4xl font-bold mb-4">Controls</h1>
+
+      <p>⬅ Move Left</p>
+      <p>➡ Move Right</p>
+      <p>SPACE — Pause / Resume Game</p>
+
+      <button
+        class="text-lg mt-10 opacity-90 border border-white-600 py-2 px-3 rounded text-center hover:opacity-100 hover:bg-green-600 transition"
+      >
+        START GAME
+      </button>
+    </div>
+
+    <!-- pause screen here -->
+
+    <div
+      id="pauseScreen"
+      class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center text-white text-5xl font-bold z-[90]"
+    >
+      PAUSED
+    </div>
+
+    <!-- <script src="custom.js"></script> -->
+    <script src="js/elements.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/basket.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/collision.js"></script>
+    <script src="js/fruit.js"></script>
+    <script src="js/control.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/pause.js"></script>
   </body>
 </html>

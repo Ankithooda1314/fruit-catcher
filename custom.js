@@ -4,9 +4,9 @@ const basket = document.getElementById("basket");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 
-const catchSound = new Audio("assests/Sounds/tap.wav");
-const overSound = new Audio("assests/Sounds/over.wav");
-const missSound = new Audio("assests/Sounds/miss.wav");
+const catchSound = new Audio("assests/sounds/tap.wav");
+const overSound = new Audio("assests/sounds/over.wav");
+const missSound = new Audio("assests/sounds/miss.wav");
 
 const fruit = document.getElementById("fruit");
 
